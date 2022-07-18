@@ -8,10 +8,12 @@
 详细步骤介绍：
 
 原始数据：
-原始数据是从东方财富网得到的公告，网站为 https://data.eastmoney.com/notices/ ，数据日期为2022/5/17-2022/5/22，数据格式如下
+原始数据是从东方财富网得到的公告，网站为 https://data.eastmoney.com/notices/ ，数据日期为2022/5/17-2022/5/22，4000+条数据，数据格式如下
 ![image](https://github.com/hao990813/NLP_project_test/blob/master/60ac92c8e2ebffac176032835055f1d.png)
 
-
-
-
+数据预处理阶段：
+data_with_sentiment文件首先读取储存在data文件夹下的原始数据，引入哈工大停用词表，利用正则表达式只保留公告中不在停用词表中的汉字，另外去除‘公告’这个词。将同一天同一支股票的
+公告信息进行合并，对股票代码进行补全，删除北交所股票。引入了中国金融情绪词典，详细介绍： http://www.doc88.com/p-69199879282388.html，其中files文件夹下包含着pos与neg的txt，
+本项目对某一天某只股票的公告进行情感分类的依据为该天公告的词在pos中出现的次数与在neg中出现的次数，data_with_sentiment结束后dataframe的格式如图所示
+![image]
 
