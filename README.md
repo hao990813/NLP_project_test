@@ -28,7 +28,8 @@ data_merge文件首先进行与mhtz数据库的链接，找到5.17-5.22号之间
 
 本实验采取了两种文本嵌入方法：word2vec与bert，对于已有数据来说word2vec效果更佳。
 word2vec_embedding文件实现了word2vec，利用北京师范大学和中国人民大学研究者开源的中文预训练词向量 Chinese-Word-Vectors，将切分的每个词语转化为 300 维的向量。对情感（-1，0，1）进行one-hot编码作为标签，对分词后的公告向量进行填充和剪枝来实现长度一致作为输入。keras提供了Embedding层，结合lstm模型对文本的情感进行深度学习，网络结构以及最后三分类预测的结果如图所示
-![image](https://github.com/hao990813/NLP_project_test/blob/master/9b5d4b5929f422f6d971177ae56029f.png)
+![image](https://github.com/hao990813/NLP_project_test/blob/master/3fff915bab5fe2797278ee4a397ff0a.png)
+bert_embedding文件使用TensorFlow Hub上的预训练模型BERT，针对中文的预训练模型v4，以及配套的preprocess模型，利用输出的sequence_outputt作为中文嵌入向量进行下游工作，将每条新闻公告输入都转化为768维的向量，为了比较两种文本嵌入模型的准确度，将得到的向量同样放入lstm模型中，网络结构以及最后三分类预测的结果如图所示
 ![image](https://github.com/hao990813/NLP_project_test/blob/master/9b5d4b5929f422f6d971177ae56029f.png)
 
 
