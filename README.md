@@ -46,7 +46,7 @@ bert_embedding文件使用TensorFlow Hub上的预训练模型BERT，针对中文
 下一步准备扩大数据样本，并且不是单单利用当天的值去预测下一天，可以设置时间戳，利用前n天的数据去进行预测，参考https://blog.csdn.net/IYXUAN/article/details/118530843?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165692059616782246477785%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;amp;request_id=165692059616782246477785&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-118530843-null-null.142%5ev30%5econtrol,185%5ev2%5etag_show&amp;amp;utm_term=%E6%83%85%E6%84%9F%E6%A0%87%E7%AD%BE%E5%AF%B9%E8%82%A1%E7%A5%A8%E6%B6%A8%E8%B7%8C%E9%A2%84%E6%B5%8B%E2%80%98&amp;amp;spm=1018.2226.3001.4187
 
 
-所思考的问题：
+问题：
 
 1.新闻公告标题包含的情感特征不是很明显，可以尝试读取整个公告不仅仅是标题
 
