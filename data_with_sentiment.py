@@ -119,7 +119,7 @@ for i in range(len(df_news_comine['公告标题'])):
 #将统计出来的个数存入df中去
 df_news_comine['pos'] = count_pos
 df_news_comine['neg'] = count_neg
-# print(df_news_comine.head(25))
+# print(len(df_news_comine))
 
 
 

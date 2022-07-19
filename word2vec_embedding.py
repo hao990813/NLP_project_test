@@ -19,11 +19,46 @@ for i in range(len(df_full_data['公告标题'])):
             df_full_data['公告标题'][i][j] = 0
 # print(df_full_data.head(30))
 
+# ################################################################################
+# ################################################################################
+# ################################################################################
+# #删除空值
+# df_full_data = df_full_data[-(df_full_data['公告标题'].str.len()==0)]
+# df_full_data = df_full_data.reset_index(drop=True)
+# # print(len(df_full_data))
+#
+# #每段标题的长度是不一样的，我们对长度进行标准化,先初始化一个list记录长度
+# temp_len_1 = []
+# for i in range(len(df_full_data['公告标题'])):
+#         temp_len_1.append(len(df_full_data['公告标题'][i]))
+# # print(temp_len)
+#
+# #在这里将pos_or_neg转换为情感因子
+# temp_senti = []
+# for i in range(len(temp_len_1)):
+#         temp_senti.append(df_full_data['pos_or_neg'][i]/temp_len_1[i])
+# # print(temp_senti)
+# df_full_data['pos_or_neg'] = temp_senti
+# # print(len(df_full_data))
+#
+# #删除pos_or_neg为0的数据，因为不含情感极性不做研究
+# indexNames=df_full_data[(df_full_data['pos_or_neg']==0)].index
+# df_full_data.drop(indexNames,inplace=True)
+# df_full_data = df_full_data.reset_index(drop=True)
+# df_sneti_score = df_full_data[['up_or_down','current_close','current_open','current_high',
+#                              'current_low','current_vol','pos_or_neg','公告日期','代码']]
+# df_sneti_score.to_csv('df_sneti_score.csv',encoding='utf_8_sig')
+# # print(len(df_full_data))
+# # print(df_full_data.head())
+# ################################################################################
+# ################################################################################
+# ################################################################################
+
 #每段标题的长度是不一样的，我们对长度进行标准化,先初始化一个list记录长度
 temp_len = []
 for i in range(len(df_full_data['公告标题'])):
         temp_len.append(len(df_full_data['公告标题'][i]))
-
+# print(temp_len)
 #设置最大的标题长度，并进行标题长度的统一化
 # 取tokens平均值并加上两个tokens的标准差，
 # 假设tokens长度的分布为正态分布，则25这个值可以涵盖94%左右的样本
@@ -45,8 +80,8 @@ ohe.fit([[-1],[0],[1]])
 senti_label = ohe.transform(df_full_data['pos_or_neg'].values.reshape(-1,1)).toarray()
 #划分测试集与训练集
 x_train, x_test, y_train, y_test = train_test_split(train_pad,senti_label,test_size=0.3,random_state=12)
-
-#将测试的label从one-hot的格式转成int方便后面classification_report调用
+# x_train, x_test, y_train, y_test = train_test_split(train_pad,df_full_data['pos_or_neg'].values,test_size=0.3,random_state=12)
+# #将测试的label从one-hot的格式转成int方便后面classification_report调用
 list_test = []
 #找到最大值所在的位置
 for i in range(len(y_test)):
@@ -83,8 +118,10 @@ model.add(Bidirectional(LSTM(units=64, return_sequences=False)))#双向LSTM考�
 #加入dropout层避免过拟合
 model.add(Dropout(0.5))
 #加入全连接层
+# model.add(Dense(3, activation='softmax'))
 model.add(Dense(3, activation='softmax'))
 #调用compile函数来指定损失函数以及优化器
+# model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
 model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
 # 开始训练,validation_split=0.2
 history = model.fit(x_train, y_train, validation_split=0.2, epochs=50,batch_size=32)

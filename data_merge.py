@@ -106,7 +106,10 @@ df_full_data = pd.merge(df_temp_full_data,df_stock_data,left_on=['代码','next_
 #删除因为merge所产生的重复的列
 df_full_data = df_full_data.drop(columns=['codenum','td'])
 #将columns重新命名
-df_full_data.columns = ['公告日期','代码','公告标题','pos','neg','current_trading_day','next_trading_day','current_close','current_open','current_high','current_low','current_vol','next_close','next_open','next_high','next_low','next_vol']
+df_full_data.columns = ['公告日期','代码','公告标题','pos','neg','current_trading_day',
+                        'next_trading_day','current_close','current_open','current_high',
+                        'current_low','current_vol','next_close','next_open','next_high',
+                        'next_low','next_vol']
 #删除有nan值所在的行
 df_full_data = df_full_data.dropna()
 #重新索引
@@ -115,11 +118,17 @@ df_full_data = df_full_data.reset_index(drop=True)
 
 # #进行判断涨跌情况
 #使用np.where嵌套看是涨还是跌，涨赋值1跌赋值-1，平赋值0
-df_full_data['up_down'] = df_full_data['next_close'] - df_full_data['current_close']
+df_full_data['up_down'] = (df_full_data['next_close'] - df_full_data['current_close'])\
+                          /df_full_data['current_close']
 quantile_top = df_full_data['up_down'].quantile(0.33)
 quantile_down = df_full_data['up_down'].quantile(0.66)
 df_full_data['up_or_down'] = np.where(df_full_data['up_down'] > quantile_down, 1, np.where(df_full_data['up_down'] < quantile_top,-1,0))
 # #进行情感判断
+# df_full_data['pos_neg'] = df_full_data['pos'] - df_full_data['neg']
+#删除在pos与neg均为0的
+indexNames=df_full_data[(df_full_data['pos']==0)&(df_full_data['neg']==0)].index
+df_full_data.drop(indexNames,inplace=True)
+df_full_data = df_full_data.reset_index(drop=True)
 df_full_data['pos_neg'] = df_full_data['pos'] - df_full_data['neg']
 # #将公告标题list转为string
 # df_full_data['公告标题'] = ''.join(df_full_data['公告标题'].tolist())
@@ -135,13 +144,17 @@ for i in range(len(df_full_data['公告标题'])):
     temp_store = []
 
 #进行情感的划分，依据pos的次数是否大于neg的词数
-df_full_data['pos_or_neg'] = np.where(df_full_data['pos_neg'] > 0, 1, np.where(df_full_data['pos_neg'] < 0,-1,0))
+df_full_data['pos_or_neg'] = np.where(df_full_data['pos_neg'] > 0, 1,
+                                      np.where(df_full_data['pos_neg'] < 0,-1,0))
+
+#
+
 # print(df_full_data.head())
 # print(type(df_full_data['公告标题'][0][0]))
 
 # #删除没用的列
 df_full_data = df_full_data.drop(columns=['pos','neg','current_trading_day','next_trading_day','next_open','next_high','next_low','next_vol','up_down','pos_neg'])
-print(df_full_data.head(30))
+# print(len(df_full_data))
 # print(df_full_data['pos_or_neg'][df_full_data['pos_or_neg']== -1].count())
 # print(df_full_data['pos_or_neg'][df_full_data['pos_or_neg']== 0].count())
 # print(df_full_data['pos_or_neg'][df_full_data['pos_or_neg']== 1].count())

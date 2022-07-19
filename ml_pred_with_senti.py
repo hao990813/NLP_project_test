@@ -62,9 +62,9 @@ pred_arr = transfer.fit_transform(df_pred)
 # up_down_label = ohe.transform(pred_arr[:,0].reshape(-1,1)).toarray()
 
 ##################################################################################
-#使用LDA线性判别准确度0.435
+#使用LDA线性判别准确度0.29
 ###################################################################################
-# #将小数转换为整数
+# # #将小数转换为整数
 # label_output = pred_arr[:, 0]*10
 # # 训练集和验证集的划分
 # x_train, x_test, y_train, y_test = \
@@ -78,7 +78,7 @@ pred_arr = transfer.fit_transform(df_pred)
 # print("准确率为：", model.score(x_test, y_test))
 
 # ##################################################################################
-# #使用knn准确度0.524
+# #使用knn准确度0.518
 # ###################################################################################
 # 将小数转换为整数
 # label_output = pred_arr[:, 0]*10
@@ -98,7 +98,7 @@ pred_arr = transfer.fit_transform(df_pred)
 # print("准确率为：", model.score(x_test, y_test))
 
 ##################################################################################
-#使用SVM准确度0.518
+#使用SVM准确度0.473
 ###################################################################################
 # # 将小数转换为整数
 # label_output = pred_arr[:, 0]*10
@@ -114,7 +114,7 @@ pred_arr = transfer.fit_transform(df_pred)
 # print("准确率为：", model.score(x_test, y_test))
 
 ##################################################################################
-#使用决策树准确度0.544
+#使用决策树准确度0.463
 ###################################################################################
 # # 将小数转换为整数
 # label_output = pred_arr[:, 0]*10
@@ -134,25 +134,25 @@ pred_arr = transfer.fit_transform(df_pred)
 # print("准确率为：", model.score(x_test, y_test))
 
 # ##################################################################################
-# #使用随机森林准确度0.629
+# #使用随机森林准确度0.504
 # ###################################################################################
 # 将小数转换为整数
-# label_output = pred_arr[:, 0]*10
-# # 训练集和验证集的划分
-# x_train, x_test, y_train, y_test = \
-#     train_test_split(pred_arr[:, 1:], label_output, test_size=0.3, random_state=12)
-#
-# model = RandomForestClassifier()
-# #设置超参数
-# param = {"n_estimators": [100,200,300,400,500,600,700,800,900,1000,1100,1200],
-#          "max_depth": [1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40,45,50]}
-# #使用GridSearchCV进行参数的调优
-# gc = GridSearchCV(model, param_grid=param, cv=2)
-# model.fit(x_train, y_train)
-# # 预测测试数据集，得出准确率
-# y_predict = model.predict(x_test)
-# print("预测测试集类别：", y_predict)
-# print("准确率为：", model.score(x_test, y_test))
+label_output = pred_arr[:, 0]*10
+# 训练集和验证集的划分
+x_train, x_test, y_train, y_test = \
+    train_test_split(pred_arr[:, 1:], label_output, test_size=0.3, random_state=12)
+
+model = RandomForestClassifier()
+#设置超参数
+param = {"n_estimators": [100,200,300,400,500,600,700,800,900,1000,1100,1200],
+         "max_depth": [1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40,45,50]}
+#使用GridSearchCV进行参数的调优
+gc = GridSearchCV(model, param_grid=param, cv=2)
+model.fit(x_train, y_train)
+# 预测测试数据集，得出准确率
+y_predict = model.predict(x_test)
+print("预测测试集类别：", y_predict)
+print("准确率为：", model.score(x_test, y_test))
 
 
 

@@ -88,7 +88,7 @@ for i in range(len(list_test)):
         y_test_list.append(1)
 
 ##################################################################################
-#普通lstm准确度0.58
+#普通lstm准确度0.45
 ###################################################################################
 # model = Sequential()
 # model.add(LSTM(200, input_shape=(x_train.shape[1], x_train.shape[2])))
@@ -98,10 +98,10 @@ for i in range(len(list_test)):
 # #调用compile函数来指定损失函数以及优化器
 # model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
 # # 开始训练,validation_split=0.2
-# history = model.fit(x_train, y_train, validation_split=0.2, epochs=300, batch_size=32)
+# history = model.fit(x_train, y_train, validation_split=0.2, epochs=1000, batch_size=32)
 
 ##################################################################################
-#堆叠lstm准确度0.61
+#堆叠lstm准确度0.49
 ###################################################################################
 # model = Sequential()
 # model.add(LSTM(units=200, input_shape=(x_train.shape[1], x_train.shape[2]),return_sequences=True))
@@ -112,10 +112,10 @@ for i in range(len(list_test)):
 # #调用compile函数来指定损失函数以及优化器
 # model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
 # # 开始训练,validation_split=0.2
-# history = model.fit(x_train, y_train, validation_split=0.2, epochs=300, batch_size=32)
+# history = model.fit(x_train, y_train, validation_split=0.2, epochs=1000, batch_size=32)
 
 ##################################################################################
-#ConvLSTM2D准确度0.57
+#ConvLSTM2D准确度0.51
 ###################################################################################
 # x_train = x_train.reshape(x_train.shape + (1, 1))
 # x_test = x_test.reshape(x_test.shape + (1, 1))
@@ -133,10 +133,10 @@ for i in range(len(list_test)):
 # #调用compile函数来指定损失函数以及优化器
 # model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
 # # 开始训练,validation_split=0.2
-# history = model.fit(x_train, y_train, validation_split=0.2, epochs=300, batch_size=32)
+# history = model.fit(x_train, y_train, validation_split=0.2, epochs=1000, batch_size=32)
 
 ##################################################################################
-#cnn*lstm准确度0.62
+#cnn*lstm准确度0.46
 ###################################################################################
 # model = Sequential()
 # model.add(Conv1D(filters=64, kernel_size=3, padding='same', strides=1,
@@ -151,9 +151,9 @@ for i in range(len(list_test)):
 # #调用compile函数来指定损失函数以及优化器
 # model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
 # # 开始训练,validation_split=0.2
-# history = model.fit(x_train, y_train, validation_split=0.2, epochs=300, batch_size=32)
+# history = model.fit(x_train, y_train, validation_split=0.2, epochs=1000, batch_size=32)
 ##################################################################################
-#双向lstm准确度0.59
+#双向lstm准确度0.48
 ###################################################################################
 #创建一个Sequential模型
 model = Sequential()
@@ -167,7 +167,7 @@ model.add(Dense(3, activation='softmax'))
 #调用compile函数来指定损失函数以及优化器
 model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
 # 开始训练,validation_split=0.2
-history = model.fit(x_train, y_train, validation_split=0.2, epochs=300,batch_size=32)
+history = model.fit(x_train, y_train, validation_split=0.2, epochs=1000,batch_size=32)
 
 ############################################################################################
 #打印模型结构
