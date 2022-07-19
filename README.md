@@ -41,8 +41,9 @@ bert_embedding文件使用TensorFlow Hub上的预训练模型BERT，针对中文
 ![image](https://github.com/hao990813/NLP_project_test/blob/master/135a0c87855c60ea21f2bff2107c27a.png)
 
 结论与总结：
-深度学习算法普遍上比传统的机器学习效果要跟好，融入的情感特征并未在很大程度上提高股票预测的精度，猜测可能是由于训练样本太少的缘故导致，天数跨度只有五天无法进行很好的预测，
-下一步准备扩大数据样本，并且不是单单利用当天的值去预测下一天，可以设置时间戳，利用前n填的数据去进行预测参考https://blog.csdn.net/IYXUAN/article/details/118530843?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165692059616782246477785%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;amp;request_id=165692059616782246477785&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-118530843-null-null.142%5ev30%5econtrol,185%5ev2%5etag_show&amp;amp;utm_term=%E6%83%85%E6%84%9F%E6%A0%87%E7%AD%BE%E5%AF%B9%E8%82%A1%E7%A5%A8%E6%B6%A8%E8%B7%8C%E9%A2%84%E6%B5%8B%E2%80%98&amp;amp;spm=1018.2226.3001.4187
+
+深度学习算法普遍上比传统的机器学习效果要更好，融入的情感特征并未在很大程度上提高股票预测的精度，猜测可能是由于训练样本太少的缘故导致，天数跨度只有五天无法进行很好的预测，
+下一步准备扩大数据样本，并且不是单单利用当天的值去预测下一天，可以设置时间戳，利用前n天的数据去进行预测，参考https://blog.csdn.net/IYXUAN/article/details/118530843?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165692059616782246477785%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;amp;request_id=165692059616782246477785&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-118530843-null-null.142%5ev30%5econtrol,185%5ev2%5etag_show&amp;amp;utm_term=%E6%83%85%E6%84%9F%E6%A0%87%E7%AD%BE%E5%AF%B9%E8%82%A1%E7%A5%A8%E6%B6%A8%E8%B7%8C%E9%A2%84%E6%B5%8B%E2%80%98&amp;amp;spm=1018.2226.3001.4187
 
 
 所思考的问题：
@@ -51,7 +52,7 @@ bert_embedding文件使用TensorFlow Hub上的预训练模型BERT，针对中文
 
 2.数据量太小时间跨度太短
 
-3.很多研究都基于个股，对个股公告/股评进行研究来预测个股的涨跌，而本项目是针对出现在公告中的所有股票，所以在构建特征的时候加上了公告的时间与股票代码，这样子会不会影响到模型的效果。
+3.很多研究都基于个股，对个股公告/股评进行研究来预测个股的涨跌，而本项目是针对出现在公告中的所有股票，所以在构建特征的时候加上了公告的时间与股票代码，这样子是否会影响到模型的效果。
 
 参考资料：
 Development of a Stock Price Prediction Framework for
