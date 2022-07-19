@@ -33,6 +33,14 @@ word2vec_embedding文件实现了word2vec，利用北京师范大学和中国人
 bert_embedding文件使用TensorFlow Hub上的预训练模型BERT，针对中文的预训练模型v4，以及配套的preprocess模型，利用输出的sequence_outputt作为中文嵌入向量进行下游工作，将每条新闻公告输入都转化为768维的向量。为了比较两种文本嵌入模型的准确度，将得到的向量同样放入lstm模型中，网络结构以及最后三分类预测的结果如图所示
 ![image](https://github.com/hao990813/NLP_project_test/blob/master/9b5d4b5929f422f6d971177ae56029f.png)
 
+涨跌预测阶段：
+在此阶段采用对比实验的方式来研究情感因子是否能提高股票涨跌预测的精确度，以及在已有数据下神魔模型对股票涨跌的预测效果最好。有四个文件分别为lstm_pred_with_senti,lstm_pred_without_senti,ml_pred_with_senti,ml_pred_without_senti。其中前两个文件都是采用lstm模型对股票涨跌进行预测，采用的lstm种类有普通单层lstm,堆叠lstm,ConvLSTM2D,cnn*lstm,双向lstm五种，后两个文件是通过机器学习的方法对股票涨跌进行预测采用的机器学习模型为LDA线性判别，knn，SVM，决策树，随机森林五种。
+
+第一个和第三个文件将情感作为其中一个特征，第二个和第四个文件则是对比试验没有将情感作为特征，输入的特征为股票当天的开盘价，收盘价，最高价，最低价，成交量，时间，股票代码，预测的是第二天股票收盘价的涨跌平情况（三分类）。
+
+
+
+
 
 
 
