@@ -54,6 +54,7 @@ bert_embedding文件使用TensorFlow Hub上的预训练模型BERT，针对中文
 
 3.很多研究都基于个股，对个股公告/股评进行研究来预测个股的涨跌，而本项目是针对出现在公告中的所有股票，所以在构建特征的时候加上了公告的时间与股票代码，这样子是否会影响到模型的效果。
 
+4.可以尝试利用情感分类softmax后的输出作为特征，而不是单纯的（-1，0，1）
 参考资料：
 Development of a Stock Price Prediction Framework for
 Intelligent Media and Technical Analysis
